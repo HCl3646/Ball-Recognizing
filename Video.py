@@ -58,7 +58,6 @@ while True:
                 print("\n")
 
     cv2.imshow('~dst', cv2.resize(src, dsize=(0,0), fx=4.0, fy=4.0, interpolation=cv2.INTER_LINEAR))
-    cv2.imshow('dst',dst)
 
     idx += 1
 
