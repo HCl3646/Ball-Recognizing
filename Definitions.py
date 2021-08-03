@@ -42,3 +42,11 @@ def on_trackbar(pos):
 
 def distance(x1, y1, x2, y2):
     return math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2)
+
+
+def gradient(x1, y1, x2, y2):
+    if abs((x1 - x2) / (y1 - y2)) >= 1:
+        result = (x1 - x2) / (y1 - y2)
+    else:
+        result = (y1 - y2) / (x1 - x2)
+    return result
