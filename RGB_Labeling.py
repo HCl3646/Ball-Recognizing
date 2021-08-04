@@ -4,6 +4,7 @@ import cv2
 import numpy as np
 import Definitions as df
 import erasing_background as eb
+from openpyxl import Workbook
 
 mod = sys.modules[__name__]
 video = cv2.VideoCapture("Golf_Test_1.mp4")
@@ -14,6 +15,7 @@ if not video.isOpened():
 delay = df.getDelay(video)
 idx, score, score_0 = np.zeros(3)
 balls = list()
+score_list = list()
 
 while True:
     ret, img = video.read()
@@ -47,7 +49,7 @@ while True:
             length = df.distance(j[ - 1][0], j[- 1][1], p[0], p[1])
             if length > 200:
                 cnt += 1
-            elif length < 8:
+            elif length < 5:
                 moving = False
                 break
             else:
@@ -81,10 +83,12 @@ while True:
             cv2.line(src, (int(i[j][0]),int(i[j][1])),(int(i[j+1][0]),int(i[j+1][1])),(0,255,255),1)
     
     cv2.imshow('dst', src)
+    
     idx += 1
     if score != score_0:
         print(int(score), int(idx))
         score_0 = score
+        score_list.append(idx)
         cv2.imwrite("images/img_{}.jpg".format(int(idx)),src)
 
     if cv2.waitKey(delay) == 27:
@@ -92,3 +96,14 @@ while True:
 
 video.release()
 cv2.destroyAllWindows()
+
+write_wb = Workbook()
+write_ws = write_wb.active
+write_ws.append(score_list)
+for i in balls:
+    for j in i:
+        (write_ws.cell(column=4*balls.index(i)+1, row= i.index(j)+3)).value = j[0]
+        (write_ws.cell(column=4*balls.index(i)+2, row= i.index(j)+3)).value = j[1]
+        (write_ws.cell(column=4*balls.index(i)+3, row= i.index(j)+3)).value = j[2]
+write_wb.save('images/balls.xlsx')
+#=(F2-F1)/(E2-E1)
