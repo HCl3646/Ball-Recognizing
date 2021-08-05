@@ -7,7 +7,7 @@ import finding_circle as fc
 import erasing_background as eb
 import Definitions as df
 
-video = cv2.VideoCapture("Putting - 1.mp4")
+video = cv2.VideoCapture("tasks/Putting - 1.mp4")
 
 if not video.isOpened():
     sys.exit()

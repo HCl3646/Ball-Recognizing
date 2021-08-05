@@ -8,7 +8,7 @@ import erasing_background as eb
 
 param = [20, 100, 1000, 10000]
 
-img1 = cv2.imread('../ball3_2.jpg', cv2.IMREAD_GRAYSCALE)
+img1 = cv2.imread('tasks/NearBall_5.jpg', cv2.IMREAD_GRAYSCALE)
 src = img1.copy()
 
 alpha = 0.8
@@ -37,4 +37,3 @@ cv2.imshow('~dst', src)
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
-
