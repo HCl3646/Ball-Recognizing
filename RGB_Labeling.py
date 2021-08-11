@@ -83,7 +83,7 @@ while True:
             cv2.line(src, (int(i[j][0]), int(i[j][1])), (int(
                 i[j+1][0]), int(i[j+1][1])), (0, 255, 255), 1)
 
-    cv2.imshow('dst', src)
+    cv2.imshow('dst', cv2.resize(src, (0,0), None, fx=0.5, fy=0.5,interpolation=None))
 
     idx += 1
     if score != score_0:

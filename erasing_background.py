@@ -30,5 +30,3 @@ def BackGroundHSV(img, low, high):
     img[mask > 0] = [0, 0, 0]
 
     return img
-
-
