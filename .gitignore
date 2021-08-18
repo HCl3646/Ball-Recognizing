@@ -4,4 +4,5 @@ abc.txt
 images/
 .gitignore
 .vscode/
-
+.jpg
+.idea/
