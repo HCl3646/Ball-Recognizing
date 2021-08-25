@@ -8,7 +8,7 @@ import functools
 
 mod = sys.modules[__name__]
 
-video = cv2.VideoCapture("tasks/Golf_Test_2-1.mp4")
+video = cv2.VideoCapture("tasks/Golf_Test_2-4.mp4")
 
 if not video.isOpened():
     sys.exit()
@@ -16,6 +16,7 @@ if not video.isOpened():
 delay = df.getDelay(video)
 bool = True
 idx = 0
+angle_putter = 0
 while True:
     ret, img = video.read()
 
@@ -83,7 +84,7 @@ while True:
         box = cv2.boxPoints(rect)
         box = np.int0(box)
         if h != 0:
-            if 1/20 < w/h < 1/1.8 and w*h > 500:
+            if 1/20 < w/h < 1/1.5 and w*h > 500:
                 cv2.drawContours(pimg, [box], -1, (0, 255, 0), 1)
                 boxes.append(rect)
     if len(boxes) >= 1:
@@ -100,7 +101,7 @@ while True:
     theta = angle_line - angle_putter
     if abs(theta) > 45:
         theta = 90 - abs(theta)
-        line_theta = math.radians(90 - angle_putter)
+        line_theta = math.radians(angle_putter-90)
     else:
         theta = abs(theta)
         line_theta = math.radians(angle_putter)
@@ -121,7 +122,7 @@ while True:
         idx -= 1
         cv2.line(cimg, (int(x0-500/math.tan(line_theta)),int(y0-500)), (int(x0+500/math.tan(line_theta)),int(y0+500)), (0, 0, 255), 5)
 
-    cv2.imshow("dst", cv2.resize(cimg,(0,0),None,fx=0.5, fy=0.5, interpolation=None))
+    cv2.imshow("dst", cv2.resize(pimg,(0,0),None,fx=0.5, fy=0.5, interpolation=None))
 
     if cv2.waitKey(delay) == 27:
         break

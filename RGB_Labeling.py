@@ -7,7 +7,7 @@ import erasing_background as eb
 from openpyxl import Workbook
 
 mod = sys.modules[__name__]
-video = cv2.VideoCapture("tasks/Golf_Test_1.mp4")
+video = cv2.VideoCapture("tasks/Golf_Test_2-2.mp4")
 
 if not video.isOpened():
     sys.exit()

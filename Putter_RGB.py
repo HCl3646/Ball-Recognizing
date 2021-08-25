@@ -6,7 +6,7 @@ import Definitions as df
 import erasing_background as eb
 from openpyxl import Workbook
 
-video = cv2.VideoCapture("tasks\Golf_Test_1.mp4")
+video = cv2.VideoCapture("tasks\Golf_Test_2-4.mp4")
 
 if not video.isOpened():
     sys.exit()
@@ -30,7 +30,6 @@ while True:
     mask_green = cv2.inRange(hsv, np.array([30,0,0]), np.array([60, 255, 255]))
     img[mask_green > 0] = [0,0,0]
 
-    cdimg = cv2.Canny(img, 30, 255)
 
     img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
@@ -73,7 +72,7 @@ while True:
         print(angle_0+90-angle)
         theta_0 = theta    
 
-    cv2.imshow("src" ,cimg)
+    cv2.imshow("src" ,cv2.resize(cimg, (0,0), None, fx = 0.5, fy = 0.5, interpolation=None))
     if cv2.waitKey(delay) == 27:
         break
 
